@@ -202,7 +202,7 @@ public class AdjacencyListGraphTest {
     }
 
     @Test
-    public void traverseTest() {
+    public void traverseTestEllensberg() {
         List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg);
 
         Set<Node<String>> firstLevel = new HashSet<>();
@@ -241,7 +241,133 @@ public class AdjacencyListGraphTest {
         }
     }
 
+    @Test
+    public void traverseTestWallaWalla() {
+        List<Node<String>> traversal = breadthFirstTraversal(washington, wallaWalla);
+
+        Set<Node<String>> firstLevel = new HashSet<>();
+        firstLevel.add(wallaWalla);
+
+        Set<Node<String>> secondLevel = new HashSet<>();
+        secondLevel.add(richland);
+
+        Set<Node<String>> thirdLevel = new HashSet<>();
+        thirdLevel.add(yakima);
+        thirdLevel.add(spokane);
+
+        Set<Node<String>> fourthLevel = new HashSet<>();
+        fourthLevel.add(ellensberg);
+
+        Set<Node<String>> fifthLevel = new HashSet<>();
+        fifthLevel.add(seattle);
+
+        Set<Node<String>> sixthLevel = new HashSet<>();
+        fifthLevel.add(bellingham);
+        fifthLevel.add(tacoma);
+
+        Set<Node<String>> seventhLevel = new HashSet<>();
+        fifthLevel.add(olympia);
+
+        Set<Node<String>> eighthLevel = new HashSet<>();
+        fifthLevel.add(vancouver);
+
+        for (int i = 0; i < traversal.size(); i++) {
+            Node<String> current = traversal.get(i);
+            if (i < firstLevel.size()) {
+                assertTrue(firstLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size()) {
+                assertTrue(secondLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size()) {
+                assertTrue(thirdLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size()) {
+                assertTrue(fourthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size()) {
+                assertTrue(fifthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size()) {
+                assertTrue(sixthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size() + seventhLevel.size()) {
+                assertTrue(seventhLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size() + seventhLevel.size() + eighthLevel.size()) {
+                assertTrue(eighthLevel.contains(current));
+            }
+        }
+    }
+
+    @Test
+    public void traverseTestSeattle() {
+        List<Node<String>> traversal = breadthFirstTraversal(washington, seattle);
+
+        Set<Node<String>> firstLevel = new HashSet<>();
+        firstLevel.add(seattle);
+
+        Set<Node<String>> secondLevel = new HashSet<>();
+        secondLevel.add(bellingham);
+        secondLevel.add(ellensberg);
+        secondLevel.add(tacoma);
+
+        Set<Node<String>> thirdLevel = new HashSet<>();
+        thirdLevel.add(spokane);
+        thirdLevel.add(yakima);
+
+        Set<Node<String>> fourthLevel = new HashSet<>();
+        fourthLevel.add(olympia);
+
+        Set<Node<String>> fifthLevel = new HashSet<>();
+        fifthLevel.add(richland);
+
+        Set<Node<String>> sixthLevel = new HashSet<>();
+        fifthLevel.add(vancouver);
+
+        Set<Node<String>> seventhLevel = new HashSet<>();
+        fifthLevel.add(wallaWalla);
+
+        for (int i = 0; i < traversal.size(); i++) {
+            Node<String> current = traversal.get(i);
+            if (i < firstLevel.size()) {
+                assertTrue(firstLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size()) {
+                assertTrue(secondLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size()) {
+                assertTrue(thirdLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size()) {
+                assertTrue(fourthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size()) {
+                assertTrue(fifthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size()) {
+                assertTrue(sixthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size() + seventhLevel.size()) {
+                assertTrue(seventhLevel.contains(current));
+            } 
+        }
+    }
+
+    //From video, written out in method visitAllCities
     public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
+        Queue<Node<String>> qq = new LinkedList<>();
+        Set<Node<String>> isEnqueued = new HashSet<>();
+        List<Node<String>> ll = new LinkedList<>();
+        //put the starting point in the queue
+        qq.add(start);
+        isEnqueued.add(start);
+        ll.add(start);
+
+        while (!qq.isEmpty()) {
+            //Now take it off, keep a reference of it
+            Node<String> current = qq.poll();
+            System.out.println("visiting " + current);
+            //look at all of it's neighbors
+            for (Node<String> neighbor: graph.getNeighbors(current)) {
+                //for all neighbors, if they haven't been enqueued them, then do do.
+                if(!isEnqueued.contains(neighbor)) {
+                    qq.add(neighbor);
+                    ll.add(neighbor);
+                    isEnqueued.add(neighbor);
+                }
+            }
+        }
+        //keep pulling off the places that get added to the queue and visiting their neighbors until all have been visited.
+        System.out.println("start --> " + ll + " <-- end");
+        return ll;
     }
 
     @Test
@@ -269,6 +395,7 @@ public class AdjacencyListGraphTest {
     }
 
     public int tripCost(Graph graph, List<Node<String>> itinerary) {
+        return 0;
     }
 
     @Test
@@ -292,5 +419,38 @@ public class AdjacencyListGraphTest {
     }
 
     public int numIslands(Graph graph) {
+        return 0;
+    }
+
+    //From Video
+    @Test
+    public void visitFromBellingham() {
+        visitAllCities(washington, bellingham);
+    }
+
+    //BREADTH-FIRST TRAVERSAL
+    //From Video
+    public void visitAllCities(Graph<String> graph, Node<String> start) {
+        Queue<Node<String>> qq = new LinkedList<>();
+        Set<Node<String>> isEnqueued = new HashSet<>();
+
+        //put the starting point in the queue
+        qq.add(start);
+        isEnqueued.add(start);
+
+        while (!qq.isEmpty()) {
+            //Now take it off, keep a reference of it
+            Node<String> current = qq.poll();
+            System.out.println("visiting " + current);
+            //look at all of it's neighbors
+            for (Node<String> neighbor: graph.getNeighbors(current)) {
+                //for all neighbors, if they haven't been enqueued them, then do do.
+                if(!isEnqueued.contains(neighbor)) {
+                    qq.add(neighbor);
+                    isEnqueued.add(neighbor);
+                }
+            }
+        }
+        //keep pulling off the places that get added to the queue and visiting their neighbors until all have been visited.
     }
 }
