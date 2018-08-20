@@ -399,23 +399,39 @@ public class AdjacencyListGraphTest {
     public int tripCost(Graph graph, List<Node<String>> itinerary) {
         int cost = 0;
 
-//        Object[] cities = itinerary.toArray();
-//        for (city : cities) {
-//         graph.getEdge(city, city);
-//        }
-//        ListIterator<Node<String>> current = itinerary.listIterator();
-//        visitAllCities(washington, (Node<String>) this);
-        Node<String> node2;
+        Node<String> node1 = null;
+        Node<String> node2 = null;
 
-        while (!itinerary.isEmpty()){
-            Node<String> node1 = itinerary.remove(0);
-            node2 = itinerary.remove(0);
-        int holdCost = graph.getEdge(node1, node2).getCost();
-        holdCost += cost;
-        cost = holdCost;
-        node1 = node2;
+        for (int i = 0; i < itinerary.size()-1; i++) {
+
+//            if (i){
+//                break;
+//            }
+
+            node1 = itinerary.get(i);
+            node2 = itinerary.get(i+1);
+
+            if (!(itinerary.get(i+1) == null)){
+
+
+                int holdCost = graph.getEdge(node1, node2).getCost();
+                holdCost += cost;
+                cost = holdCost;
+//                node1 = node2;
+
+            }
         }
-
+//        Node<String> node2;
+//
+//        while (!itinerary.isEmpty()){
+//            Node<String> node1 = itinerary.remove(0);
+//            node2 = itinerary.remove(0);
+//        int holdCost = graph.getEdge(node1, node2).getCost();
+//        holdCost += cost;
+//        cost = holdCost;
+//        node1 = node2;
+//        }
+//
 
         return cost;
     }
