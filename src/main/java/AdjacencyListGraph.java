@@ -90,7 +90,6 @@ public class AdjacencyListGraph<E> implements Graph<E> {
         //From Video
         checkNodesExists(start, end);
         return costs.get(start).get(end);
-
     }
 
     private void checkNodesExists(Node<E> node1, Node<E> node2) {
@@ -109,4 +108,6 @@ public class AdjacencyListGraph<E> implements Graph<E> {
             throw new IllegalArgumentException(message);
         }
     }
+
 }
+
