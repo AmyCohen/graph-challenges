@@ -202,7 +202,7 @@ public class AdjacencyListGraphTest {
     }
 
     @Test
-    public void traverseTest() {
+    public void traverseTestEllensberg() {
         List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg);
 
         Set<Node<String>> firstLevel = new HashSet<>();
@@ -237,6 +237,59 @@ public class AdjacencyListGraphTest {
                 assertTrue(fourthLevel.contains(current));
             } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size()) {
                 assertTrue(fifthLevel.contains(current));
+            }
+        }
+    }
+
+    @Test
+    public void traverseTestWallaWalla() {
+        List<Node<String>> traversal = breadthFirstTraversal(washington, wallaWalla);
+
+        Set<Node<String>> firstLevel = new HashSet<>();
+        firstLevel.add(wallaWalla);
+
+        Set<Node<String>> secondLevel = new HashSet<>();
+        secondLevel.add(richland);
+
+        Set<Node<String>> thirdLevel = new HashSet<>();
+        thirdLevel.add(yakima);
+        thirdLevel.add(spokane);
+
+        Set<Node<String>> fourthLevel = new HashSet<>();
+        fourthLevel.add(ellensberg);
+
+        Set<Node<String>> fifthLevel = new HashSet<>();
+        fifthLevel.add(seattle);
+
+        Set<Node<String>> sixthLevel = new HashSet<>();
+        fifthLevel.add(bellingham);
+        fifthLevel.add(tacoma);
+
+        Set<Node<String>> seventhLevel = new HashSet<>();
+        fifthLevel.add(olympia);
+
+        Set<Node<String>> eighthLevel = new HashSet<>();
+        fifthLevel.add(vancouver);
+        
+
+        for (int i = 0; i < traversal.size(); i++) {
+            Node<String> current = traversal.get(i);
+            if (i < firstLevel.size()) {
+                assertTrue(firstLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size()) {
+                assertTrue(secondLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size()) {
+                assertTrue(thirdLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size()) {
+                assertTrue(fourthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size()) {
+                assertTrue(fifthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size()) {
+                assertTrue(sixthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size() + seventhLevel.size()) {
+                assertTrue(seventhLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size() + sixthLevel.size() + seventhLevel.size() + eighthLevel.size()) {
+                assertTrue(eighthLevel.contains(current));
             }
         }
     }
