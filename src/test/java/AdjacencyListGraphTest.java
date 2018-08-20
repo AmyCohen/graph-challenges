@@ -402,14 +402,15 @@ public class AdjacencyListGraphTest {
         Node<String> node1 = null;
         Node<String> node2 = null;
 
-        for (int i = 0; i < itinerary.size()-1; i++) {
 
-//            if (i){
-//                break;
-//            }
+        for (int i = 0; i < itinerary.size()-1; i++) {
 
             node1 = itinerary.get(i);
             node2 = itinerary.get(i+1);
+
+        if (!washington.isConnected(node1, node2)) {
+            return 0;
+        }
 
             if (!(itinerary.get(i+1) == null)){
 
@@ -417,21 +418,8 @@ public class AdjacencyListGraphTest {
                 int holdCost = graph.getEdge(node1, node2).getCost();
                 holdCost += cost;
                 cost = holdCost;
-//                node1 = node2;
-
             }
         }
-//        Node<String> node2;
-//
-//        while (!itinerary.isEmpty()){
-//            Node<String> node1 = itinerary.remove(0);
-//            node2 = itinerary.remove(0);
-//        int holdCost = graph.getEdge(node1, node2).getCost();
-//        holdCost += cost;
-//        cost = holdCost;
-//        node1 = node2;
-//        }
-//
 
         return cost;
     }
