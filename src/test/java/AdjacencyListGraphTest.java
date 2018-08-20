@@ -88,6 +88,8 @@ public class AdjacencyListGraphTest {
         washington.addTwoWayEdge(yakima, richland, 77);
         washington.addTwoWayEdge(richland, wallaWalla, 57);
         washington.addTwoWayEdge(richland, spokane, 144);
+
+
     }
 
     @Test
@@ -395,7 +397,27 @@ public class AdjacencyListGraphTest {
     }
 
     public int tripCost(Graph graph, List<Node<String>> itinerary) {
-        return 0;
+        int cost = 0;
+
+//        Object[] cities = itinerary.toArray();
+//        for (city : cities) {
+//         graph.getEdge(city, city);
+//        }
+//        ListIterator<Node<String>> current = itinerary.listIterator();
+//        visitAllCities(washington, (Node<String>) this);
+        Node<String> node2;
+
+        while (!itinerary.isEmpty()){
+            Node<String> node1 = itinerary.remove(0);
+            node2 = itinerary.remove(0);
+        int holdCost = graph.getEdge(node1, node2).getCost();
+        holdCost += cost;
+        cost = holdCost;
+        node1 = node2;
+        }
+
+
+        return cost;
     }
 
     @Test
