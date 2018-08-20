@@ -445,7 +445,8 @@ public class AdjacencyListGraphTest {
     }
 
     public int numIslands(Graph graph) {
-        return 0;
+
+        return graph.getEdges().size();
     }
 
     //From Video
