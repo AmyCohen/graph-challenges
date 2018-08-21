@@ -408,7 +408,7 @@ public class AdjacencyListGraphTest {
             node1 = itinerary.get(i);
             node2 = itinerary.get(i+1);
 
-        if (!washington.isConnected(node1, node2)) {
+        if (!graph.isConnected(node1, node2)) {
             return 0;
         }
 
@@ -444,9 +444,18 @@ public class AdjacencyListGraphTest {
         assertEquals(2, numIslands(usa));
     }
 
-    public int numIslands(Graph graph) {
+    public int numIslands(Graph<String> graph) {
 
-        return graph.getEdges().size();
+        int islands = 0;
+
+        Set<Node<String>> cities = graph.getNodes();
+
+        for (Node<String> node : graph.getNodes()) {
+            if (graph.getNeighbors(node).isEmpty()){
+                islands++;
+            }
+        }
+        return islands;
     }
 
     //From Video
